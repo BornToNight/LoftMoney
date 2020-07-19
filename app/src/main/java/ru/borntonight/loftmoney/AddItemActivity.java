@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AddItemActivity extends AppCompatActivity {
 
-    EditText name, price;
-    ImageView check;
-    TextView add;
+    private EditText name, price;
+    private ImageView check;
+    private TextView add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class AddItemActivity extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Если оба поля заполнены - перекрасить текст и кнопку
-                if (name.getText().toString().trim().length() != 0 && price.getText().toString().trim().length() != 0) {
+                if (name.getText().toString().length() != 0 && price.getText().toString().length() != 0) {
                     add.setTextColor(getResources().getColor(R.color.colorAppleGreen));
                     check.setColorFilter(getResources().getColor(R.color.colorAppleGreen));
                     // если хотя бы одно пустое - перекрасить обратно
@@ -55,7 +55,7 @@ public class AddItemActivity extends AppCompatActivity {
     // События нажатия кнопки "Добавить"
     public void addItem (View v) {
         // Отобразить уведомление, если одно из полей пустое
-        if (name.getText().toString().trim().length() == 0 || price.getText().toString().trim().length() == 0) {
+        if (name.getText().toString().length() == 0 || price.getText().toString().length() == 0) {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show();
         } else {
             // todo добавление
