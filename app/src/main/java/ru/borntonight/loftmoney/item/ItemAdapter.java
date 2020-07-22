@@ -33,6 +33,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         notifyDataSetChanged();
     }
 
+    public void addData(Item item) {
+        items.add(item);
+        notifyDataSetChanged();
+    }
+
     // какой View использовать для каждого элемента
     @NonNull
     @Override

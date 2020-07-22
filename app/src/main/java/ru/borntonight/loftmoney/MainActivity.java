@@ -1,6 +1,8 @@
 package ru.borntonight.loftmoney;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,18 @@ public class MainActivity extends AppCompatActivity {
                 // todo действие при нажатии
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+
+            // fixme цвет в зависимости от доход/расход
+            Item item = new Item(data.getStringExtra("name"), data.getStringExtra("price"), R.color.colorAppleGreen );
+            itemAdapter.addData(item);
+        }
     }
 
     private List<Item> generateExpenses() {
@@ -48,5 +62,10 @@ public class MainActivity extends AppCompatActivity {
         List<Item> items = new ArrayList<>();
         items.add(new Item("Премия", "7500 ₽", R.color.colorAppleGreen));
         return items;
+    }
+
+    public void addItemClick(View v) {
+        Intent intentAddItem = new Intent(this, AddItemActivity.class);
+        startActivityForResult(intentAddItem, 1);
     }
 }

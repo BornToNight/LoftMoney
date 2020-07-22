@@ -1,5 +1,6 @@
 package ru.borntonight.loftmoney;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -58,7 +59,11 @@ public class AddItemActivity extends AppCompatActivity {
         if (name.getText().toString().trim().length() == 0 || price.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show();
         } else {
-            // todo добавление
+            Intent mainActivityIntent = new Intent();
+            mainActivityIntent.putExtra("name", name.getText().toString());
+            mainActivityIntent.putExtra("price", price.getText() + " ₽");
+            setResult(RESULT_OK, mainActivityIntent);
+            finish();
         }
     }
 }
