@@ -1,71 +1,49 @@
 package ru.borntonight.loftmoney;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import ru.borntonight.loftmoney.item.Item;
-import ru.borntonight.loftmoney.item.ItemAdapter;
-import ru.borntonight.loftmoney.item.ItemAdapterClick;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+import ru.borntonight.loftmoney.item.BudgetFragment;
 
 public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    ItemAdapter itemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.priceRecycleView);
-        itemAdapter = new ItemAdapter();
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(new BudgetPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
 
-        recyclerView.setAdapter(itemAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-
-        itemAdapter.addData(generateExpenses());
-        itemAdapter.addData(generateIncomes());
-        itemAdapter.setItemAdapterClick(new ItemAdapterClick() {
-            @Override
-            public void onItemClick(Item item) {
-                // todo действие при нажатии
-            }
-        });
-
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setText(R.string.expenses);
+        tabLayout.getTabAt(1).setText(R.string.incomes);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
+    public static class BudgetPagerAdapter extends FragmentPagerAdapter {
 
-            // fixme цвет в зависимости от доход/расход
-            Item item = new Item(data.getStringExtra("name"), data.getStringExtra("price"), R.color.colorAppleGreen );
-            itemAdapter.addData(item);
+        public BudgetPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
         }
-    }
 
-    private List<Item> generateExpenses() {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item("Молоко", "50 ₽", R.color.colorExpense));
-        return items;
-    }
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return new BudgetFragment();
+        }
 
-    private List<Item> generateIncomes() {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item("Премия", "7500 ₽", R.color.colorAppleGreen));
-        return items;
-    }
-
-    public void addItemClick(View v) {
-        Intent intentAddItem = new Intent(this, AddItemActivity.class);
-        startActivityForResult(intentAddItem, 1);
+        @Override
+        public int getCount() {
+            return 2;
+        }
     }
 }

@@ -8,5 +8,6 @@
     <color name="colorBar">#3574FA</color>
     <color name="colorBarDark">#326EEE</color>
     <color name="colorExpense">#4A90E2</color>
-    <color name="divideColor">#F2F2F2</color>
+    <color name="colorDivide">#F2F2F2</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>
