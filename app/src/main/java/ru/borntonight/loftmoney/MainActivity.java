@@ -2,16 +2,17 @@ package ru.borntonight.loftmoney;
 
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabLayout;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-import ru.borntonight.loftmoney.item.BudgetFragment;
+
+import com.google.android.material.tabs.TabLayout;
+
+import ru.borntonight.loftmoney.item.ExpensesFragment;
+import ru.borntonight.loftmoney.item.IncomesFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,8 +39,12 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            // fixme если будут проблемы с конструктором. Решение - переделать на сеттер
-            return new BudgetFragment(position);
+            if (position == 0) {
+                return new ExpensesFragment();
+            } else if (position == 1) {
+                return new IncomesFragment();
+            }
+            return null;
         }
 
         @Override
