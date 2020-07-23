@@ -22,6 +22,11 @@ import ru.borntonight.loftmoney.R;
 public class BudgetFragment extends Fragment {
 
     private ItemAdapter itemAdapter;
+    private int currentTab;
+
+    public BudgetFragment(int currentTab) {
+        this.currentTab = currentTab;
+    }
 
     @Nullable
     @Override
@@ -59,9 +64,13 @@ public class BudgetFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-
             // fixme цвет в зависимости от доход/расход
-            Item item = new Item(data.getStringExtra("name"), data.getStringExtra("price"), R.color.colorAppleGreen );
+            Item item;
+            if (currentTab == 0) {
+                item = new Item(data.getStringExtra("name"), data.getStringExtra("price"), R.color.colorExpense );
+            } else {
+                item = new Item(data.getStringExtra("name"), data.getStringExtra("price"), R.color.colorAppleGreen );
+            }
             itemAdapter.addData(item);
         }
     }

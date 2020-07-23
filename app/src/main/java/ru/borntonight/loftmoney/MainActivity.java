@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            return new BudgetFragment();
+            // fixme если будут проблемы с конструктором. Решение - переделать на сеттер
+            return new BudgetFragment(position);
         }
 
         @Override
