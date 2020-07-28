@@ -1,5 +1,8 @@
 package ru.borntonight.loftmoney.item;
 
+import ru.borntonight.loftmoney.R;
+import ru.borntonight.loftmoney.remote.MoneyItem;
+
 public class Item {
 
     private String name;
@@ -10,6 +13,12 @@ public class Item {
         this.name = name;
         this.price = price;
         this.color = color;
+    }
+
+    public static Item getInstance(MoneyItem moneyItem) {
+        return new Item(moneyItem.getName(),
+                moneyItem.getPrice() + "₽",
+                moneyItem.getType().equals("expense") ? R.color.colorExpense : R.color.colorAppleGreen);
     }
 
     public String getName() {

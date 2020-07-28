@@ -12,11 +12,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 public class AddItemActivity extends AppCompatActivity {
 
     private EditText name, price;
     private ImageView check;
     private TextView add;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +63,28 @@ public class AddItemActivity extends AppCompatActivity {
 
     // События нажатия кнопки "Добавить"
     public void addItem (View v) {
+
         // Отобразить уведомление, если одно из полей пустое
         if (name.getText().toString().trim().length() == 0 || price.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show();
         } else {
-            Intent mainActivityIntent = new Intent();
-            mainActivityIntent.putExtra("name", name.getText().toString());
-            mainActivityIntent.putExtra("price", price.getText() + " ₽");
-            setResult(RESULT_OK, mainActivityIntent);
-            finish();
+            Disposable disposable = ((LoftApp) getApplication()).getMoneyApi().addItem(name.getText().toString(), price.getText().toString(), getIntent().getStringExtra("type"))
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            Intent mainActivityIntent = new Intent();
+                            setResult(RESULT_OK, mainActivityIntent);
+                            finish();
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Toast.makeText(getApplication(), "Что-то пошло не так", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            compositeDisposable.add(disposable);
         }
     }
 }
