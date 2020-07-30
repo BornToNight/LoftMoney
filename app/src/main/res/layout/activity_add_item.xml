@@ -30,7 +30,7 @@
         android:layout_marginTop="7dp"
         android:ems="10"
         android:hint="@string/price"
-        android:inputType="number"
+        android:digits="0123456789."
         android:textColor="#3574fa"
         android:textColorHint="#dbdbdb"
         app:layout_constraintEnd_toEndOf="parent"

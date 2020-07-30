@@ -3,4 +3,6 @@
     <string name="name">Название</string>
     <string name="price">Цена</string>
     <string name="add">Добавить</string>
+    <string name="expenses">Расходы</string>
+    <string name="incomes">Доходы</string>
 </resources>
