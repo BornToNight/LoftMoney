@@ -6,24 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <view
-        android:id="@+id/priceRecycleView"
-        class="androidx.recyclerview.widget.RecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </view>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/priceRecycleView"
+                class="androidx.recyclerview.widget.RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:src="@drawable/ic_baseline_add_24"
         app:backgroundTint="#FFC107"
-        app:layout_constraintBottom_toBottomOf="@+id/priceRecycleView"
-        app:layout_constraintEnd_toEndOf="@+id/priceRecycleView" />
+        app:layout_constraintBottom_toBottomOf="@+id/swipe_refresh"
+        app:layout_constraintEnd_toEndOf="@+id/swipe_refresh" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
