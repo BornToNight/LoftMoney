@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,6 +34,7 @@ public class IncomesFragment extends Fragment {
 
     private ItemAdapter itemAdapter;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -64,6 +66,13 @@ public class IncomesFragment extends Fragment {
                 startActivityForResult(intentAddItem, 1);
             }
         });
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getIncomes();
+            }
+        });
         getIncomes();
 
         return view;
@@ -90,12 +99,13 @@ public class IncomesFragment extends Fragment {
                         for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
                             items.add(Item.getInstance(moneyItem));
                         }
+                        swipeRefreshLayout.setRefreshing(false);
                         itemAdapter.setData(items);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
         // убить запрос (цепочку)

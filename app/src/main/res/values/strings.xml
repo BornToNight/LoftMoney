@@ -5,4 +5,5 @@
     <string name="add">Add</string>
     <string name="expenses">Expenses</string>
     <string name="incomes">Incomes</string>
+    <string name="activity_main_toolbar_title">Budget</string>
 </resources>
