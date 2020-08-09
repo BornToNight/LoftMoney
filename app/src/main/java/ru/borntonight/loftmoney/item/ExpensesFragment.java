@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +22,9 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import ru.borntonight.loftmoney.AddItemActivity;
 import ru.borntonight.loftmoney.LoftApp;
 import ru.borntonight.loftmoney.R;
 import ru.borntonight.loftmoney.remote.MoneyItem;
-import ru.borntonight.loftmoney.remote.MoneyResponse;
 
 public class ExpensesFragment extends Fragment {
 
@@ -57,16 +53,6 @@ public class ExpensesFragment extends Fragment {
             }
         });
 
-        FloatingActionButton buttonAdd = view.findViewById(R.id.floatingActionButton);
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentAddItem = new Intent(getActivity(), AddItemActivity.class);
-                intentAddItem.putExtra("type", "expense");
-                startActivityForResult(intentAddItem, 1);
-            }
-        });
-
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -89,14 +75,15 @@ public class ExpensesFragment extends Fragment {
 
     private void getExpenses() {
         final List<Item> items = new ArrayList<>();
+        String token = this.getActivity().getSharedPreferences(getString(R.string.app_name), 0).getString(LoftApp.TOKEN_KEY, "");
 
-        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getItems("expense")
+        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getItems(token, "expense")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<MoneyResponse>() {
+                .subscribe(new Consumer<List<MoneyItem>>() {
                     @Override
-                    public void accept(MoneyResponse moneyResponse) throws Exception {
-                        for (MoneyItem moneyItem : moneyResponse.getMoneyItemList()) {
+                    public void accept(List<MoneyItem> moneyItems) {
+                        for (MoneyItem moneyItem : moneyItems) {
                             items.add(Item.getInstance(moneyItem));
                         }
                         swipeRefreshLayout.setRefreshing(false);
@@ -104,7 +91,7 @@ public class ExpensesFragment extends Fragment {
                     }
                 }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
+                    public void accept(Throwable throwable) {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });

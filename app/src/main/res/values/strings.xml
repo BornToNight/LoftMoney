@@ -6,4 +6,5 @@
     <string name="expenses">Expenses</string>
     <string name="incomes">Incomes</string>
     <string name="activity_main_toolbar_title">Budget</string>
+    <string name="enter">Login</string>
 </resources>

@@ -6,4 +6,5 @@
     <string name="expenses">Расходы</string>
     <string name="incomes">Доходы</string>
     <string name="activity_main_toolbar_title">Учёт бюджета</string>
+    <string name="enter">Вход</string>
 </resources>
