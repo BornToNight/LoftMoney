@@ -80,6 +80,7 @@ public class AddItemActivity extends AppCompatActivity {
                             Intent mainActivityIntent = new Intent();
                             setResult(RESULT_OK, mainActivityIntent);
                             finish();
+                            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         }
                     }, new Consumer<Throwable>() {
                         @Override
@@ -89,5 +90,11 @@ public class AddItemActivity extends AppCompatActivity {
                     });
             compositeDisposable.add(disposable);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 }

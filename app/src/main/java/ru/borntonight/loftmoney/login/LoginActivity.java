@@ -62,5 +62,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(mainIntent);
+        finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.alpha);
     }
 }

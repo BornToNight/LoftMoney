@@ -69,10 +69,4 @@ public class MainActivity extends AppCompatActivity {
             return 2;
         }
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-    }
 }
