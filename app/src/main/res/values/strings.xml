@@ -7,4 +7,7 @@
     <string name="incomes">Incomes</string>
     <string name="activity_main_toolbar_title">Budget</string>
     <string name="enter">Login</string>
+    <string name="selected">"Selected: %1$s"</string>
+    <string name="remove">Remove</string>
+    <string name="confirmation">Do you really want to delete choice items?</string>
 </resources>

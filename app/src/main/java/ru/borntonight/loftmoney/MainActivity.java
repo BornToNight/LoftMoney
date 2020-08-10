@@ -2,10 +2,13 @@ package ru.borntonight.loftmoney;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -19,12 +22,17 @@ import ru.borntonight.loftmoney.item.IncomesFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    TabLayout tabLayout;
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TabLayout tabLayout = findViewById(R.id.tabs);
+        toolbar = findViewById(R.id.toolbar);
+
+        tabLayout = findViewById(R.id.tabs);
         final ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new BudgetPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
 
@@ -68,5 +76,19 @@ public class MainActivity extends AppCompatActivity {
         public int getCount() {
             return 2;
         }
+    }
+
+    @Override
+    public void onActionModeStarted(final ActionMode mode) {
+        super.onActionModeStarted(mode);
+        tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.colorDarkGreyBlue));
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorDarkGreyBlue));
+    }
+
+    @Override
+    public void onActionModeFinished(final ActionMode mode) {
+        tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBar));
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBar));
+        super.onActionModeFinished(mode);
     }
 }
