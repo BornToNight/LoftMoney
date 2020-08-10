@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     Toolbar toolbar;
+    FloatingActionButton buttonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setText(R.string.expenses);
         tabLayout.getTabAt(1).setText(R.string.incomes);
 
-        FloatingActionButton buttonAdd = findViewById(R.id.floatingActionButton);
+        buttonAdd = findViewById(R.id.floatingActionButton);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,12 +82,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActionModeStarted(final ActionMode mode) {
         super.onActionModeStarted(mode);
+        buttonAdd.setVisibility(View.GONE);
         tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.colorDarkGreyBlue));
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorDarkGreyBlue));
     }
 
     @Override
     public void onActionModeFinished(final ActionMode mode) {
+        buttonAdd.setVisibility(View.VISIBLE);
         tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBar));
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBar));
         super.onActionModeFinished(mode);
