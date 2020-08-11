@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setText(R.string.expenses);
         tabLayout.getTabAt(1).setText(R.string.incomes);
+        tabLayout.getTabAt(2).setText(R.string.budget);
 
         buttonAdd = findViewById(R.id.floatingActionButton);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +55,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intentAddItem, 1);
             }
         });
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 2) {
+                    buttonAdd.setVisibility(View.GONE);
+                } else {
+                    buttonAdd.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }});
     }
 
     public static class BudgetPagerAdapter extends FragmentPagerAdapter {
@@ -69,13 +91,15 @@ public class MainActivity extends AppCompatActivity {
                 return new ExpensesFragment();
             } else if (position == 1) {
                 return new IncomesFragment();
+            } else if (position ==2) {
+                return new BalanceFragment();
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 
