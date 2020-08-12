@@ -1,13 +1,13 @@
 package ru.borntonight.loftmoney.remote;
 
 public class MoneyItem {
-    String id;
+    int id;
     String name;
     int price;
     String type;
     String date;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

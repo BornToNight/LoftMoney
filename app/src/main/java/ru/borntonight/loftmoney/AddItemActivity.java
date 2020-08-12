@@ -31,6 +31,8 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
         name = findViewById(R.id.name);
         price = findViewById(R.id.price);
         check = findViewById(R.id.check);
@@ -68,7 +70,8 @@ public class AddItemActivity extends AppCompatActivity {
         if (name.getText().toString().trim().length() == 0 || price.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show();
         } else {
-            Disposable disposable = ((LoftApp) getApplication()).getMoneyApi().addItem(name.getText().toString(), price.getText().toString(), getIntent().getStringExtra("type"))
+            String token = getSharedPreferences(getString(R.string.app_name), 0).getString(LoftApp.TOKEN_KEY, "");
+            Disposable disposable = ((LoftApp) getApplication()).getMoneyApi().addItem(token, name.getText().toString(), price.getText().toString(), getIntent().getStringExtra("type"))
                     .subscribeOn(Schedulers.computation())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Action() {
@@ -77,6 +80,7 @@ public class AddItemActivity extends AppCompatActivity {
                             Intent mainActivityIntent = new Intent();
                             setResult(RESULT_OK, mainActivityIntent);
                             finish();
+                            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         }
                     }, new Consumer<Throwable>() {
                         @Override
@@ -86,5 +90,11 @@ public class AddItemActivity extends AppCompatActivity {
                     });
             compositeDisposable.add(disposable);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 }

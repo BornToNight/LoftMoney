@@ -4,9 +4,13 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
     defaultConfig {
         applicationId "ru.borntonight.loftmoney"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -15,19 +19,34 @@ android {
     }
 
     buildTypes {
+        debug {
+            resValue("string", "app_name", "loftmoney-debug")
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue("string", "app_name", "LoftMoney")
+        }
+    }
+
+    flavorDimensions 'color1'
+
+    productFlavors {
+        colorize {
+            dimension 'color1'
+            resValue("color", "colorBar", "#7ED321")
+            resValue("color", "colorBarDark", "#0B9E00")
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0'
 
     implementation "com.squareup.okhttp3:okhttp:4.8.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.8.0"

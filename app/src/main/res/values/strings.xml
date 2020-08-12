@@ -1,9 +1,16 @@
 <resources>
-    <string name="app_name">LoftMoney</string>
     <string name="name">Name</string>
     <string name="price">Price</string>
     <string name="add">Add</string>
     <string name="expenses">Expenses</string>
     <string name="incomes">Incomes</string>
     <string name="activity_main_toolbar_title">Budget</string>
+    <string name="enter">Login</string>
+    <string name="selected">"Selected: %1$s"</string>
+    <string name="remove">Remove</string>
+    <string name="confirmation">Do you really want to delete choice items?</string>
+    <string name="balance_finance_title">Available finance</string>
+    <string name="expense">Expense</string>
+    <string name="income">Income</string>
+    <string name="budget">Budget</string>
 </resources>

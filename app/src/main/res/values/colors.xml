@@ -5,9 +5,11 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorAppleGreen">#7ED321</color>
     <color name="colorWhiteThree">#EAEAEA</color>
-    <color name="colorBar">#3574FA</color>
-    <color name="colorBarDark">#326EEE</color>
     <color name="colorExpense">#4A90E2</color>
     <color name="colorDivide">#F2F2F2</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDarkGreyBlue">#333F59</color>
+    <color name="colorWhiteFive">#F2F2F2</color>
+    <color name="colorMediumGrey">#666664</color>
+    <color name="colorPaleOrange">#FF9E57</color>
 </resources>

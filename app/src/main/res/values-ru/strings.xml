@@ -6,4 +6,12 @@
     <string name="expenses">Расходы</string>
     <string name="incomes">Доходы</string>
     <string name="activity_main_toolbar_title">Учёт бюджета</string>
+    <string name="enter">Вход</string>
+    <string name="selected">"Выбрано: %1$s"</string>
+    <string name="remove">Удалить</string>
+    <string name="confirmation">Вы действительно хотите удалить выбранные элементы?</string>
+    <string name="balance_finance_title">Доступные Финансы</string>
+    <string name="expense">Расход</string>
+    <string name="income">Доход</string>
+    <string name="budget">Бюджет</string>
 </resources>
