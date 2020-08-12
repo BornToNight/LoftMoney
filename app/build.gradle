@@ -4,6 +4,10 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
     defaultConfig {
         applicationId "ru.borntonight.loftmoney"
         minSdkVersion 26
@@ -15,9 +19,24 @@ android {
     }
 
     buildTypes {
+        debug {
+            resValue("string", "app_name", "loftmoney-debug")
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue("string", "app_name", "LoftMoney")
+        }
+    }
+
+    flavorDimensions 'color1'
+
+    productFlavors {
+        colorize {
+            dimension 'color1'
+            resValue("color", "colorBar", "#7ED321")
+            resValue("color", "colorBarDark", "#0B9E00")
         }
     }
 }
