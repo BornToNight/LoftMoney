@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorWhite"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,12 +9,11 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="104dp"
         android:layout_marginStart="33dp"
         android:layout_marginTop="127dp"
-        android:layout_marginEnd="104dp"
         android:ems="10"
         android:hint="@string/name"
-        android:backgroundTint="#dbdbdb"
         android:inputType="textPersonName"
         android:textColor="#3574fa"
         android:textColorHint="#dbdbdb"
@@ -30,7 +28,6 @@
         android:layout_marginEnd="104dp"
         android:layout_marginStart="33dp"
         android:layout_marginTop="7dp"
-        android:backgroundTint="#dbdbdb"
         android:ems="10"
         android:hint="@string/price"
         android:digits="0123456789."
@@ -44,10 +41,10 @@
         android:id="@+id/check"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
+        android:tint="@color/colorWhiteThree"
         app:layout_constraintEnd_toStartOf="@+id/add"
         app:layout_constraintTop_toTopOf="@+id/add"
-        app:srcCompat="@drawable/ic_baseline_check_24"
-        app:tint="@color/colorWhiteThree" />
+        app:srcCompat="@drawable/ic_baseline_check_24" />
 
     <TextView
         android:id="@+id/add"
@@ -60,6 +57,7 @@
         android:gravity="center_vertical"
         android:onClick="addItem"
         android:text="@string/add"
+        android:textAlignment="center"
         android:textColor="@color/colorWhiteThree"
         app:drawableTint="#e3e3e3"
         app:layout_constraintEnd_toEndOf="parent"
